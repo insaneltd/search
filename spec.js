@@ -1,31 +1,27 @@
+describe('perform search', function() {
+  it('should greet the named user', function() {
+    // Load the AngularJS homepage.
+    browser.get('https://www.thomascook.com/');
 
-// spec.js
-describe('Protractor Demo App', function() {
-  var firstNumber = element(by.model('first'));
-  var secondNumber = element(by.model('second'));
-  var goButton = element(by.id('gobutton'));
-  var latestResult = element(by.binding('latest'));
-  var history = element.all(by.repeater('result in memory'));
+    element(by.id('SearchbarForm-toggleAirportsTooltip')).click();
+    element(by.xpath('//*[@id="PopularTooltip--airports"]/div[2]/div/div[2]/div[1]/label')).click();
+    element(by.id('iconClose-airports')).click();
+    browser.sleep(3000);
 
-  function add(a, b) {
-    firstNumber.sendKeys(a);
-    secondNumber.sendKeys(b);
-    goButton.click();
-  }
+    element(by.id('SearchbarForm-toggleDestinationsTooltip')).click();
+    element(by.xpath('//*[@id="PopularTooltip--destinations"]/div[2]/div/div[2]/div[3]/label')).click();
+    element(by.id('iconClose-destinations')).click();
+    browser.sleep(3000);
+    
+    element(by.id('when')).click();
+    element(by.id('Searchbar-wholeMonth')).click();
+    browser.sleep(3000);
 
-  beforeEach(function() {
-    browser.get('http://juliemr.github.io/protractor-demo/');
-  });
+    element(by.model('duration.selectedDuration')).$('[value="string:5"]').click();
+    element(by.model('room.adultsSelected')).$('[value="number:4"]').click();
+    browser.sleep(3000);
 
-  it('should have a history', function() {
-    add(1, 2);
-    add(3, 4);
-
-    expect(history.count()).toEqual(2);
-
-    add(5, 6);
-
-    expect(history.count()).toEqual(3); // This is wrong!
-  });
-});
+    element(by.id('SearchbarForm-submitBtn')).click();
+	}];
+}];
 
