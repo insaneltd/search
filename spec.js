@@ -1,32 +1,45 @@
 describe('perform search', function() {
-  it('should greet the named user', function() {
-    // Load the AngularJS homepage.
-    browser.get('https://www.thomascook.com/');
 
-    element(by.id('SearchbarForm-toggleAirportsTooltip')).click();
-    element(by.xpath('//*[@id="PopularTooltip--airports"]/div[2]/div/div[2]/div[1]/label')).click();
-    element(by.id('iconClose-airports')).click();
+let homePage = 'https://www.thomascook.com/'
+let airportList = element(by.id('SearchbarForm-toggleAirportsTooltip'));
+let airport = element(by.xpath('//*[@id="PopularTooltip--airports"]/div[2]/div/div[2]/div[1]/label'));
+let airportCloseButton = element(by.id('iconClose-airports'));
+let destinationList = element(by.id('SearchbarForm-toggleDestinationsTooltip'));
+let destination = element(by.xpath('//*[@id="PopularTooltip--destinations"]/div[2]/div/div[2]/div[3]/label'));
+let destinationCloseButton = element(by.id('iconClose-destinations'));
+let choseStartDate = element(by.id('when'));
+let date = element(by.id('Searchbar-wholeMonth'));
+let duration = element(by.model('duration.selectedDuration')).$('[value="string:5"]');
+let persons = element(by.model('room.adultsSelected')).$('[value="number:4"]');
+let search = element(by.id('SearchbarForm-submitBtn'));
+
+  it('should choose start point', function() {
+    browser.get(homePage);
+    airportList.click();
+    airport.click();
+    airportCloseButton.click();
     browser.sleep(3000);
   });
 
-  it('should 1', function() {
-    element(by.id('SearchbarForm-toggleDestinationsTooltip')).click();
-    element(by.xpath('//*[@id="PopularTooltip--destinations"]/div[2]/div/div[2]/div[3]/label')).click();
-    element(by.id('iconClose-destinations')).click();
+  it('should choose end point', function() {
+    destinationList.click();
+    destination.click();
+    destinationCloseButton.click();
     browser.sleep(3000);
   });
   
-   it('should 2', function() { 
-    element(by.id('when')).click();
-    element(by.id('Searchbar-wholeMonth')).click();
+   it('should choose start date', function() { 
+    choseStartDate.click();
+    date.click();
     browser.sleep(3000);
  });
-  it ('should 3', function() {
-    element(by.model('duration.selectedDuration')).$('[value="string:5"]').click();
-    element(by.model('room.adultsSelected')).$('[value="number:4"]').click();
+
+  it ('should choose for how long', function() {
+    duration.click();
+    persons.click();
     browser.sleep(3000);
 
-    element(by.id('SearchbarForm-submitBtn')).click();
-	});
+    search.click();
+    });
 });
 
