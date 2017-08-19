@@ -19,15 +19,10 @@ describe('perform search', function() {
     
 	  expect(browser.getCurrentUrl()).toEqual(homePage.homeUrl);
     homePage.chooseAirport();
-      
-    homePage.destinationList.click();
-    homePage.destination.click();
-    homePage.destinationCloseButton.click();
+    homePage.chooseDestination();  
+    homePage.chooseDates();
        
-    homePage.choseStartDate.click();
-    homePage.date.click();
-
-    homePage.duration.click();
+    
     homePage.persons.click();
 
     homePage.search.click();
