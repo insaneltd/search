@@ -1,45 +1,41 @@
+const homePage = require('./pages/homePage.js');
+const searchPage = require('./pages/searchPage.js');
+
 describe('perform search', function() {
 
-let homePage = 'https://www.thomascook.com/'
-let airportList = element(by.id('SearchbarForm-toggleAirportsTooltip'));
-let airport = element(by.xpath('//*[@id="PopularTooltip--airports"]/div[2]/div/div[2]/div[1]/label'));
-let airportCloseButton = element(by.id('iconClose-airports'));
-let destinationList = element(by.id('SearchbarForm-toggleDestinationsTooltip'));
-let destination = element(by.xpath('//*[@id="PopularTooltip--destinations"]/div[2]/div/div[2]/div[3]/label'));
-let destinationCloseButton = element(by.id('iconClose-destinations'));
-let choseStartDate = element(by.id('when'));
-let date = element(by.id('Searchbar-wholeMonth'));
-let duration = element(by.model('duration.selectedDuration')).$('[value="string:5"]');
-let persons = element(by.model('room.adultsSelected')).$('[value="number:4"]');
-let search = element(by.id('SearchbarForm-submitBtn'));
+    let originalTimeout;
+
+    beforeEach(function() {
+        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 90000;
+        browser.get(homePage.homeUrl);
+        homePage.closeCookieButton.click();
+        if(homePage.closePromoPopup.isDisplayed()) {
+          homePage.closePromoPopup.click();
+      } 
+    });
 
   it('should choose start point', function() {
-    browser.get(homePage);
-    airportList.click();
-    airport.click();
-    airportCloseButton.click();
-    browser.sleep(3000);
-  });
+    
+	  expect(browser.getCurrentUrl()).toEqual(homePage.homeUrl);
+    homePage.chooseAirport();
+      
+    homePage.destinationList.click();
+    homePage.destination.click();
+    homePage.destinationCloseButton.click();
+       
+    homePage.choseStartDate.click();
+    homePage.date.click();
 
-  it('should choose end point', function() {
-    destinationList.click();
-    destination.click();
-    destinationCloseButton.click();
-    browser.sleep(3000);
-  });
-  
-   it('should choose start date', function() { 
-    choseStartDate.click();
-    date.click();
-    browser.sleep(3000);
- });
+    homePage.duration.click();
+    homePage.persons.click();
 
-  it ('should choose for how long', function() {
-    duration.click();
-    persons.click();
+    homePage.search.click();
     browser.sleep(3000);
 
-    search.click();
-    });
+    expect(browser.getCurrentUrl()).toContain(searchPage.searchResultUrl);
+    expect(searchPage.recentSearchContainer.isDisplayed()).toBeTruthy();
+        });
+
 });
 
