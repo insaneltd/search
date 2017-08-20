@@ -1,9 +1,9 @@
 class HomePage {
+	//home page variables
 	constructor() {
 		this.homeUrl = 'https://www.thomascook.com/'
 		this.closeCookieButton = element(by.id('accept-cookies'));
 		this.closePromoPopup = element(by.css('#e102148-promo-slider > span'));
-		
 		this.airportList = element(by.id('SearchbarForm-toggleAirportsTooltip'));
 		this.airport = element(by.xpath('//*[@id="PopularTooltip--airports"]/div[2]/div/div[2]/div[1]/label')); // - css selector
 		this.airportCloseButton = element(by.id('iconClose-airports'));
@@ -16,6 +16,7 @@ class HomePage {
 		this.persons = element(by.model('room.adultsSelected')).$('[value="number:4"]');
 		this.search = element(by.id('SearchbarForm-submitBtn'));
 	} 
+	// methods
 	chooseAirport() {
 		this.airportList.click();
     	this.airport.click();
@@ -31,8 +32,6 @@ class HomePage {
     	this.date.click();
     	this.duration.click();
 	}
-
 }
-
 
 module.exports = new HomePage();
