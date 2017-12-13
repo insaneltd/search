@@ -4,4 +4,4 @@ test1
 test2
 
 
-mew from remote master
+NEW LINE IN REMOTE MASTER
